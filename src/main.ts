@@ -35,6 +35,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('EMPREGA MONTE MOR')
     .setDescription('BACKEND EMPREGA MONTE MOR')
+    .addBearerAuth({ type: "http", scheme: "bearer", bearerFormat: "JWT" })
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
