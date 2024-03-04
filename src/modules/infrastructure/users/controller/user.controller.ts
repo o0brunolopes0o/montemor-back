@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Delete, Param, Body, Put } from '@nestjs/common';
 import { UserService } from '../service/user.service';
 import { User } from '../entity/user.entity';
-import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from "../dto/create-user.dto";
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { GetUserDto } from '../dto/get-user.dto';
@@ -10,6 +10,8 @@ import { GetUserDto } from '../dto/get-user.dto';
 @Controller('user')
 export class UsersController {
   constructor(private readonly userService: UserService) {}
+
+
 
   @ApiOkResponse({ type: GetUserDto })
   @Get('/get')
