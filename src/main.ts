@@ -2,9 +2,35 @@ require('dotenv').config();
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './modules/app/app.module';
+import { Logger } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.use((req, res, next) => {
+    const oldWrite = res.write;
+    const oldEnd = res.end;
+
+    const chunks = [];
+
+    res.write = (...restArgs) => {
+      chunks.push(Buffer.from(restArgs[0]));
+      oldWrite.apply(res, restArgs);
+    };
+
+    res.end = (...restArgs) => {
+      if (restArgs[0]) {
+        chunks.push(Buffer.from(restArgs[0]));
+      }
+      const body = Buffer.concat(chunks).toString('utf8');
+
+      Logger.log(`${new Date().toString()} - ${req.originalUrl} - ${res.statusCode} - ${body}`, 'RouteLogger');
+
+      oldEnd.apply(res, restArgs);
+    };
+
+    next();
+  });
 
   const config = new DocumentBuilder()
     .setTitle('EMPREGA MONTE MOR')
