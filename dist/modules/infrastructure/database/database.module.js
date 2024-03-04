@@ -26,7 +26,7 @@ exports.DatabaseModule = DatabaseModule = __decorate([
                 port: parseInt(process.env.TYPEORM_PORT),
                 username: process.env.TYPEORM_USERNAME,
                 password: process.env.TYPEORM_PASSWORD,
-                database: process.env.NODE_ENV === 'test' ? process.env.TYPEORM_TEST_DATABASE : process.env.TYPEORM_DATABASE,
+                database: process.env.TYPEORM_DATABASE,
                 sid: process.env.TYPEORM_SID,
                 serviceName: process.env.TYPEORM_SERVICE_NAME,
                 autoLoadEntities: true,
