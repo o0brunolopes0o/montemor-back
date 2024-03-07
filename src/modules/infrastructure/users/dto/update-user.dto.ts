@@ -4,14 +4,14 @@ import * as Joi from 'joi';
 
 export class UpdateUserDto {
   @ApiProperty({ description: "Nome do usuário", example: "Nome do Usuário" })
-  @JoiSchema(["CREATE"], Joi.string().required())
+  @JoiSchema(["UPDATE"], Joi.string().required())
   nome: string;
 
   @ApiProperty({ description: "Email do usuário", example: "usuario@email.com" })
-  @JoiSchema(["CREATE"], Joi.string().required())
+  @JoiSchema(["UPDATE"], Joi.string().required())
   email: string;
 
   @ApiProperty({ description: "Senha do usuário", example: "senhaSegura123" })
-  @JoiSchema(["CREATE"], Joi.string().required())
+  @JoiSchema(["UPDATE"], Joi.string().required())
   senha: string;
 }

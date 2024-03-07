@@ -12,8 +12,8 @@ import { AuthGuard } from '@nestjs/passport';
 export class UsersController {
   constructor(private readonly userService: UserService) {}
 
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard('jwt'))
+  // @ApiBearerAuth()
+  // @UseGuards(AuthGuard('jwt'))
   @ApiOkResponse({ type: GetUserDto })
   @Get('/get')
   findAll(): Promise<User[]> {
