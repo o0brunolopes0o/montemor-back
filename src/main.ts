@@ -32,9 +32,17 @@ async function bootstrap() {
     next();
   });
 
+  app.enableCors({
+    origin: process.env.CORS_WHITELIST, // substitua '*' pelo domínio do cliente ou uma lista de domínios
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type, Accept',
+    credentials: true,
+  });
+
   const config = new DocumentBuilder()
     .setTitle('EMPREGA MONTE MOR')
     .setDescription('BACKEND EMPREGA MONTE MOR')
+    .addBearerAuth({ type: "http", scheme: "bearer", bearerFormat: "JWT" })
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
